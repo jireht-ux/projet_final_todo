@@ -1,22 +1,23 @@
-from django.urls import path
+
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 from . import views
 
 app_name = "taches"
 
-# Routes CRUD pour l'application `taches`.
+
+# Router DRF pour l'API
+router = DefaultRouter()
+router.register(r'taches', views.TacheViewSet, basename='tache')
+
 urlpatterns = [
-    # Liste des tâches
+    # Routes web classiques
     path('', views.tache_list, name='list'),
-    # Créer une tâche
     path('create/', views.tache_create, name='create'),
-    # Détail d'une tâche
     path('<int:pk>/', views.tache_detail, name='detail'),
-    # Mettre à jour une tâche
     path('<int:pk>/update/', views.tache_update, name='update'),
-    # Supprimer une tâche
     path('<int:pk>/delete/', views.tache_delete, name='delete'),
-    # API: liste des tâches (DRF)
-    path('api/liste/', views.TacheListCreateAPIView.as_view(), name='api-liste'),
-    # API: détail d'une tâche (GET, PUT, DELETE)
-    path('api/<int:pk>/', views.TacheRetrieveUpdateDestroyAPIView.as_view(), name='api-detail'),
+
+    # Routes API générées par le routeur
+    path('api/', include(router.urls)),
 ]

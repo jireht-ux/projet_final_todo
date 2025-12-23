@@ -69,20 +69,11 @@ def tache_detail(request, pk):
 	return render(request, 'taches/tache_detail.html', {'tache': tache})
 
 
-class TacheListCreateAPIView(generics.ListCreateAPIView):
-	"""API view (ListCreate) pour lister et créer des Tâches.
 
-	GET  -> liste des tâches (ordonnées par date de création desc)
-	POST -> création d'une nouvelle tâche (validation via TacheSerializer)
-	"""
+# ViewSet DRF pour toutes les opérations CRUD sur Tache
+from rest_framework.viewsets import ModelViewSet
+
+class TacheViewSet(ModelViewSet):
 	queryset = Tache.objects.all().order_by('-cree_le')
-	serializer_class = TacheSerializer
-
-
-# Vue basée sur une classe pour récupérer, mettre à jour et supprimer une tâche via l'API
-from rest_framework.generics import RetrieveUpdateDestroyAPIView
-
-class TacheRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
-	queryset = Tache.objects.all()
 	serializer_class = TacheSerializer
 
