@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Confirmer la suppression</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 2rem; }
+      .danger { color: #c00; }
+      .actions { margin-top: 1rem; }
+    </style>
+  </head>
+  <body>
+    <h1>Supprimer la tâche</h1>
+    <p>Voulez-vous vraiment supprimer la tâche&nbsp;: <strong>{{ tache.titre }}</strong> ?</p>
+    {% if tache.description %}
+      <p><em>{{ tache.description }}</em></p>
+    {% endif %}
+    <form method="post">
+      {% csrf_token %}
+      <div class="actions">
+        <button type="submit" class="danger">Supprimer</button>
+        <a href="{% url 'taches:list' %}">Annuler</a>
+      </div>
+    </form>
+  </body>
+</html>

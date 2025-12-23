@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Créer une tâche</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 2rem; }
+      .form-control { width: 100%; padding: 0.5rem; margin: 0.25rem 0 0.5rem 0; }
+      button { padding: 0.5rem 1rem; }
+      .actions { margin-top: 1rem; }
+    </style>
+  </head>
+  <body>
+    <h1>Créer une tâche</h1>
+
+    <form method="post">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <div>
+        {{ form.titre.label_tag }}<br>
+        {{ form.titre }}
+        {{ form.titre.errors }}
+      </div>
+      <div>
+        {{ form.description.label_tag }}<br>
+        {{ form.description }}
+        {{ form.description.errors }}
+      </div>
+      <div>
+        {{ form.termine }} {{ form.termine.label_tag }}
+        {{ form.termine.errors }}
+      </div>
+
+      <div class="actions">
+        <button type="submit">Créer</button>
+        <a href="{% url 'taches:list' %}">Annuler</a>
+      </div>
+    </form>
+  </body>
+</html>
