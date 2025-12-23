@@ -73,7 +73,15 @@ def tache_detail(request, pk):
 # ViewSet DRF pour toutes les opérations CRUD sur Tache
 from rest_framework.viewsets import ModelViewSet
 
+
 class TacheViewSet(ModelViewSet):
-	queryset = Tache.objects.all().order_by('-cree_le')
 	serializer_class = TacheSerializer
+
+	def get_queryset(self):
+		# Retourne uniquement les tâches dont le propriétaire est l'utilisateur connecté
+		return Tache.objects.filter(owner=self.request.user).order_by('-cree_le')
+
+	def perform_create(self, serializer):
+		# Associe l'utilisateur connecté comme propriétaire lors de la création
+		serializer.save(owner=self.request.user)
 
