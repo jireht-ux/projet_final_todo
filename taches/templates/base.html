@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{% block title %}Projet Tâches{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'taches/style.css' %}">
+    {% block extra_head %}{% endblock %}
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div>
+          <strong>Projet Tâches</strong>
+        </div>
+        <nav>
+          <a href="{% url 'taches:list' %}">Tâches</a>
+          <a href="{% url 'taches:create' %}">Nouvelle tâche</a>
+          <a href="/admin/">Admin</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+      <div class="container">&copy; {{ now|date:"Y" }} — Application de gestion de tâches</div>
+    </footer>
+  </body>
+</html>

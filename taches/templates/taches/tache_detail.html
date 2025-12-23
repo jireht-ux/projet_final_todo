@@ -1,26 +1,17 @@
-<!doctype html>
-<html lang="fr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Détail de la tâche</title>
-    <style>
-      body { font-family: Arial, sans-serif; margin: 2rem; }
-      .meta { color: #666; font-size: 0.9rem; }
-      .actions { margin-top: 1rem; }
-    </style>
-  </head>
-  <body>
-    <h1>{{ tache.titre }}</h1>
-    <div class="meta">Créée le {{ tache.cree_le|date:"Y-m-d H:i" }} — {% if tache.termine %}<strong>Terminée</strong>{% else %}<strong>En attente</strong>{% endif %}</div>
-    {% if tache.description %}
-      <p>{{ tache.description }}</p>
-    {% endif %}
+{% extends 'base.html' %}
 
-    <div class="actions">
-      <a href="{% url 'taches:update' tache.pk %}">Modifier</a> |
-      <a href="{% url 'taches:delete' tache.pk %}">Supprimer</a> |
-      <a href="{% url 'taches:list' %}">Retour à la liste</a>
-    </div>
-  </body>
-</html>
+{% block title %}Détail — {{ tache.titre }}{% endblock %}
+
+{% block content %}
+  <h1>{{ tache.titre }}</h1>
+  <div style="color:#666;font-size:0.9rem">Créée le {{ tache.cree_le|date:"Y-m-d H:i" }} — {% if tache.termine %}<strong>Terminée</strong>{% else %}<strong>En attente</strong>{% endif %}</div>
+  {% if tache.description %}
+    <p>{{ tache.description }}</p>
+  {% endif %}
+
+  <div style="margin-top:1rem">
+    <a href="{% url 'taches:update' tache.pk %}">Modifier</a> |
+    <a href="{% url 'taches:delete' tache.pk %}">Supprimer</a> |
+    <a href="{% url 'taches:list' %}">Retour à la liste</a>
+  </div>
+{% endblock %}

@@ -1,38 +1,31 @@
-<!doctype html>
-<html lang="fr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Liste des tâches</title>
-    <style>
-      body { font-family: Arial, sans-serif; margin: 2rem; }
-      .terminee { color: green; }
-      .non-terminee { color: #c00; }
-      .tache { border-bottom: 1px solid #eee; padding: 0.5rem 0; }
-      .meta { color: #666; font-size: 0.9rem; }
-    </style>
-  </head>
-  <body>
-    <h1>Liste des tâches</h1>
-    {% if taches %}
-      <ul>
-        {% for t in taches %}
-          <li class="tache">
-            <strong>{{ t.titre }}</strong>
-            {% if t.termine %}
-              <span class="terminee">(terminée)</span>
-            {% else %}
-              <span class="non-terminee">(en attente)</span>
-            {% endif %}
-            <div class="meta">Créée le {{ t.cree_le|date:"Y-m-d H:i" }}</div>
-            {% if t.description %}
-              <p>{{ t.description }}</p>
-            {% endif %}
-          </li>
-        {% endfor %}
-      </ul>
-    {% else %}
-      <p>Aucune tâche trouvée.</p>
-    {% endif %}
-  </body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}Liste des tâches{% endblock %}
+
+{% block content %}
+  <h1>Liste des tâches</h1>
+  {% if taches %}
+    <ul>
+      {% for t in taches %}
+        <li style="border-bottom:1px solid #eee;padding:0.6rem 0;">
+          <strong><a href="{% url 'taches:detail' t.pk %}">{{ t.titre }}</a></strong>
+          {% if t.termine %}
+            <span style="color:green">(terminée)</span>
+          {% else %}
+            <span style="color:#c00">(en attente)</span>
+          {% endif %}
+          <div style="color:#666;font-size:0.9rem">Créée le {{ t.cree_le|date:"Y-m-d H:i" }}</div>
+          {% if t.description %}
+            <p>{{ t.description }}</p>
+          {% endif %}
+          <div style="margin-top:0.25rem">
+            <a href="{% url 'taches:update' t.pk %}">Modifier</a> |
+            <a href="{% url 'taches:delete' t.pk %}">Supprimer</a>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Aucune tâche trouvée.</p>
+  {% endif %}
+{% endblock %}
