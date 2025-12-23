@@ -15,4 +15,8 @@ urlpatterns = [
     path('<int:pk>/update/', views.tache_update, name='update'),
     # Supprimer une tâche
     path('<int:pk>/delete/', views.tache_delete, name='delete'),
+    # API: liste des tâches (DRF)
+    path('api/liste/', views.liste_taches_api, name='api-liste'),
+    # API: détail d'une tâche (GET, PUT, DELETE)
+    path('api/<int:pk>/', views.detail_tache_api, name='api-detail'),
 ]
