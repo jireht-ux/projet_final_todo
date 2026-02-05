@@ -1,0 +1,39 @@
+Auteur: TAFOTIE Jireh
+Date: 05/02/2026
+Type de livraison : Partielle
+Formation Full-Stack :Partie 1 : Initialisation de React et Connexion à l'API Django
+Checklist: 
+
+    -Les Outils Indispensables
+
+    -Création de l'Application React via Vite
+
+    -Lancement et Exploration du Projet
+
+    -Préparation de Git
+
+    -Créer des Composants
+
+    -Comprendre et Régler le Problème de CORS
+
+    -Récupérer les Données avec les "Hooks" React
+
+    -Vérification et Commit Final
+
+    -CRT DEV
+
+    -Livraison
+
+    -Pull request
+
+Fichiers  Modifiés :
+
+    -requirements.txt
+
+    -config/settings.py
+
+Fichiers ajoutés : 
+
+    -Livraisons.txt
+
+    -frontend/
