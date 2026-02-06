@@ -144,3 +144,26 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
 ]
 
+
+# -------------------------
+# Celery (Redis broker/result backend)
+# -------------------------
+# Broker URL for Celery
+CELERY_BROKER_URL = "redis://localhost:6379/0"
+
+# Result backend to store task results
+CELERY_RESULT_BACKEND = "redis://localhost:6379/0"
+
+# Serialization and timezone settings recommended for Celery
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_TIMEZONE = "UTC"
+CELERY_ENABLE_UTC = True
+
+# Run tasks eagerly in-process when True (useful for tests/dev)
+CELERY_TASK_ALWAYS_EAGER = False
+
+# Optional: django-celery-beat scheduler
+# CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
+

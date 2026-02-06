@@ -1,6 +1,58 @@
 Auteur: TAFOTIE Jireh
 Date: 06/02/2026
 Type de livraison : Partielle
+Formation Full-Stack: Ajout de Tâches Asynchrones avec Celery & Redis(Partie 1 : Introduction et Configuration)
+Checklist: 
+
+    -Préparation de la Branche Git
+
+    -Installer Redis avec Docker
+
+    -Installer les Paquets Python
+
+    -Créer le fichier de configuration de Celery
+
+    -Charger Celery au démarrage de Django
+
+    -Configurer les variables dans settings.py
+
+    -Créer une Fichier pour les Tâches
+
+    -Définir la Tâche
+
+    -Déclencher la Tâche depuis une Vue
+
+    -Lancer et Vérifier
+
+    -Commit et Fusion
+
+    -Finalisation
+
+    -CRT DEV
+
+    -Livraison
+
+    -Pull request
+
+Fichiers  Modifiés :
+
+
+    -Livraisons.txt
+    -config/__init__.py
+    -config/settings.py
+    -requirements.txt
+    -taches/urls.py
+    -taches/views.py
+
+Fichiers ajoutés : 
+
+    - config/monprojet/
+    - taches/tasks.py
+    
+--------------------------------------------------------------------
+Auteur: TAFOTIE Jireh
+Date: 06/02/2026
+Type de livraison : Partielle
 Formation Full-Stack : Partie 3 : Authentification et Déploiement
 Checklist: 
 

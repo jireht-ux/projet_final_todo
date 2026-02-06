@@ -20,4 +20,6 @@ urlpatterns = [
 
     # Routes API générées par le routeur
     path('api/', include(router.urls)),
+    # Route de test pour Celery
+    path('test-celery/', views.TestCeleryView, name='test-celery'),
 ]
