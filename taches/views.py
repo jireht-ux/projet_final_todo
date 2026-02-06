@@ -1,5 +1,6 @@
 
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponse
 
 from .models import Tache
 from .forms import TacheForm
@@ -73,6 +74,9 @@ def tache_detail(request, pk):
 # ViewSet DRF pour toutes les opérations CRUD sur Tache
 from rest_framework.viewsets import ModelViewSet
 
+# Import the Celery task
+from .tasks import tache_test_asynchrone
+
 
 class TacheViewSet(ModelViewSet):
 	serializer_class = TacheSerializer
@@ -84,4 +88,14 @@ class TacheViewSet(ModelViewSet):
 	def perform_create(self, serializer):
 		# Associe l'utilisateur connecté comme propriétaire lors de la création
 		serializer.save(owner=self.request.user)
+
+
+def TestCeleryView(request):
+	"""Vue simple déclenchant la tâche Celery `tache_test_asynchrone`.
+
+	Appel via HTTP : lance la tâche en arrière-plan avec `.delay()` et
+	retourne une réponse immédiate.
+	"""
+	tache_test_asynchrone.delay()
+	return HttpResponse("Tâche Celery déclenchée.")
 
