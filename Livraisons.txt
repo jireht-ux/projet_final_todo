@@ -1,4 +1,54 @@
 Auteur: TAFOTIE Jireh
+Date: 06/02/2026
+Type de livraison : Partielle
+Formation Full-Stack :Partie 2 : Interactivité et Gestion de l'État
+Checklist: 
+
+    -Préparation de la Branche Git
+
+    -Créer le Composant du Formulaire
+
+    -Gérer l'État du Formulaire
+
+    -Faire Remonter l'Information au Parent ("Lifting State Up")
+
+    -Gérer la Soumission du Formulaire (Requête POST)
+
+    -Créer un Composant pour un Seul Item
+
+    -Refactoriser TacheListe.jsx
+
+    -Implémenter la Suppression (Requête DELETE)
+
+    -Implémenter la Mise à Jour (Requête PATCH)
+
+    -Isoler la Logique API
+
+    -Gérer l'État de Chargement
+
+    -Vérification et Commit Final
+
+    -CRT DEV
+
+    -Livraison
+
+    -Pull request
+
+Fichiers  Modifiés :
+
+    -requirements.txt
+
+    -frontend/src/App.jsx
+
+    -frontend/src/components/TacheListe.jsx
+
+Fichiers ajoutés : 
+
+    -frontend/src/api.js
+    -frontend/src/components/AjoutTacheForm.jsx
+    -frontend/src/components/TacheItem.jsx
+---------------------------------------------------------------------------------------
+Auteur: TAFOTIE Jireh
 Date: 05/02/2026
 Type de livraison : Partielle
 Formation Full-Stack :Partie 1 : Initialisation de React et Connexion à l'API Django
