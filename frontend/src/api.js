@@ -1,35 +1,49 @@
 const API_BASE = 'http://127.0.0.1:8000'
-const AUTH_HEADER = { 'Authorization': 'Token 557576aa49e05ee8bf268fcafc9528c14fb35f37' }
 
-export async function fetchTaches() {
-  const res = await fetch(`${API_BASE}/taches/api/taches/`, { headers: AUTH_HEADER })
+function authHeader(token) {
+  let t = token
+  try {
+    if (!t && typeof localStorage !== 'undefined') {
+      t = localStorage.getItem('token')
+    }
+  } catch (e) {
+    // localStorage not available (e.g., server-side); ignore
+  }
+  return t ? { Authorization: `Token ${t}` } : {}
+}
+
+export async function fetchTaches(token) {
+  const headers = { ...authHeader(token) }
+  const res = await fetch(`${API_BASE}/taches/api/taches/`, { headers })
   if (!res.ok) throw new Error(`HTTP ${res.status}`)
   return res.json()
 }
 
-export async function addTache(titre) {
+export async function addTache(titre, token) {
+  const headers = { 'Content-Type': 'application/json', ...authHeader(token) }
   const res = await fetch(`${API_BASE}/taches/api/taches/`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', ...AUTH_HEADER },
+    headers,
     body: JSON.stringify({ titre })
   })
   if (!res.ok) throw new Error(`HTTP ${res.status}`)
   return res.json()
 }
 
-export async function supprimeTache(id) {
+export async function supprimeTache(id, token) {
   const res = await fetch(`${API_BASE}/taches/api/taches/${id}/`, {
     method: 'DELETE',
-    headers: AUTH_HEADER
+    headers: authHeader(token)
   })
   if (!res.ok) throw new Error(`HTTP ${res.status}`)
   return res
 }
 
-export async function toggleTache(id, termine) {
+export async function toggleTache(id, termine, token) {
+  const headers = { 'Content-Type': 'application/json', ...authHeader(token) }
   const res = await fetch(`${API_BASE}/taches/api/taches/${id}/`, {
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json', ...AUTH_HEADER },
+    headers,
     body: JSON.stringify({ termine: !termine })
   })
   if (!res.ok) throw new Error(`HTTP ${res.status}`)
