@@ -1,6 +1,61 @@
 Auteur: TAFOTIE Jireh
 Date: 06/02/2026
 Type de livraison : Partielle
+Formation Full-Stack : Partie 3 : Authentification et Déploiement
+Checklist: 
+
+    -Préparation de la Branche Git
+
+    -Créer la Page de Connexion
+
+    -Gestion de l'État d'Authentification Global
+
+    -Implémenter la Logique de Connexion
+
+    -Affichage Conditionnel
+
+    -Mettre à Jour les Appels API
+
+    -Implémenter la Déconnexion (Logout)
+
+    -Vérification Côté Backend (Django)
+
+    -Adaptation Côté Frontend (React)
+
+    -"Builder" l'Application React
+
+    -Configurer Django pour Servir les Fichiers React
+
+    -Finalisation et Commit
+
+    -Vérification et Commit Final
+
+    -CRT DEV
+
+    -Livraison
+
+    -Pull request
+
+Fichiers  Modifiés :
+
+
+    -config/settings.py
+
+    -config/urls.py
+
+    -frontend/src/App.jsx
+    
+    -frontend/src/api.js
+
+Fichiers ajoutés : 
+
+    -frontend/src/components/LoginPage.jsx
+    
+--------------------------------------------------------------------
+
+Auteur: TAFOTIE Jireh
+Date: 06/02/2026
+Type de livraison : Partielle
 Formation Full-Stack :Partie 2 : Interactivité et Gestion de l'État
 Checklist: 
 
