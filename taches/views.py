@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from .models import Tache
 from .forms import TacheForm
 from .serializers import TacheSerializer
+from .tasks import send_creation_email
 
 # Django REST Framework
 from rest_framework.decorators import api_view
@@ -24,7 +25,10 @@ def tache_create(request):
 	if request.method == 'POST':
 		form = TacheForm(request.POST)
 		if form.is_valid():
-			form.save()
+			# Sauvegarde l'objet puis exécute la tâche localement pour forcer l'exception
+			tache = form.save()
+			# Exécute la tâche synchronously (localement) et laisse l'exception remonter
+			send_creation_email.apply(args=(tache.id,), throw=True)
 			return redirect('taches:list')
 	else:
 		form = TacheForm()
@@ -75,7 +79,7 @@ def tache_detail(request, pk):
 from rest_framework.viewsets import ModelViewSet
 
 # Import the Celery task
-from .tasks import tache_test_asynchrone
+from .tasks import tache_test_asynchrone, send_creation_email
 
 
 class TacheViewSet(ModelViewSet):
@@ -88,6 +92,8 @@ class TacheViewSet(ModelViewSet):
 	def perform_create(self, serializer):
 		# Associe l'utilisateur connecté comme propriétaire lors de la création
 		serializer.save(owner=self.request.user)
+		# Déclenche l'envoi d'e-mail en tâche asynchrone en passant l'ID créé
+		send_creation_email.delay(serializer.instance.id)
 
 
 def TestCeleryView(request):

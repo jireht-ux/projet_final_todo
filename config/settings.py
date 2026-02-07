@@ -139,6 +139,9 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Send emails to the console during development
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 # CORS
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
