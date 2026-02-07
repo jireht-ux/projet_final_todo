@@ -179,3 +179,11 @@ CELERY_BEAT_SCHEDULE = {
     },
 }
 
+
+# Désactiver la configuration LOGGING (empêche Django d'appliquer dictConfig)
+LOGGING_CONFIG = None
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+}
+

@@ -1,6 +1,42 @@
 Auteur: TAFOTIE Jireh
 Date: 07/02/2026
 Type de livraison : Partielle
+Formation Django & PostgreSQL : Maîtriser l'ORM et le SQL:  Partie 1 : Comprendre ce que l'ORM Fait Vraiment
+Checklist: 
+
+    -Préparation de la Branche Git
+
+    -Activer le Logging des Requêtes SQL
+
+    -Observer la "Manipulation SQL" 
+
+    -Utiliser la Propriété .query
+
+    -Utiliser transaction.atomic
+
+    -Méthode 1 : Manager.raw() (pour récupérer des modèles)
+
+    -Sécurité : Éviter l'Injection SQL
+
+    -Méthode 2 : Accès direct au curseur (pour tout le reste)
+
+    -Récapitulatif et Finalisation  
+
+    -Commit et Fusion
+
+    -Livraison
+
+    -Pull request
+
+Fichiers  Modifiés :
+- config/settings.py
+
+Fichiers ajoutés : 
+   
+------------------------------------------------------------------------------------------------
+Auteur: TAFOTIE Jireh
+Date: 07/02/2026
+Type de livraison : Partielle
 Formation Full-Stack: Ajout de Tâches Asynchrones avec Celery & Redis: Partie 3 : Intégration Front-End et Tâches Planifiées
 Checklist: 
 
