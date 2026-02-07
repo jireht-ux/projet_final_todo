@@ -20,6 +20,7 @@ urlpatterns = [
 
     # Routes API générées par le routeur
     path('api/', include(router.urls)),
+    path('api/taches-avec-commentaires/', views.TacheAvecCommentairesView.as_view(), name='taches-avec-commentaires'),
     path('start-report/', views.StartReportGenerationView.as_view(), name='start-report'),
     path('check-report-status/<str:task_id>/', views.CheckTaskStatusView.as_view(), name='check-report-status'),
     # Route de test pour Celery

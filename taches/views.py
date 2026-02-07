@@ -13,6 +13,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
 from rest_framework.views import APIView
+from rest_framework.renderers import JSONRenderer
 from celery.result import AsyncResult
 
 
@@ -120,4 +121,28 @@ def TestCeleryView(request):
 	"""
 	tache_test_asynchrone.delay()
 	return HttpResponse("Tâche Celery déclenchée.")
+
+
+class TacheAvecCommentairesView(APIView):
+	"""Liste toutes les Tache et, pour chacune, sérialise le titre et
+	une liste des contenus de ses commentaires.
+
+	Implémentée volontairement avec une boucle pour illustrer le problème
+	N+1 (accès `tache.commentaires.all()` dans la boucle déclenche une
+	requête par tâche).
+	"""
+	renderer_classes = [JSONRenderer]
+
+	def get(self, request):
+		# Précharger les commentaires pour éviter le problème N+1
+		taches = Tache.objects.prefetch_related('commentaires').all()
+		data = []
+		for tache in taches:
+			# CETTE LIGNE DÉCLENCHE UNE NOUVELLE REQUÊTE SQL À CHAQUE FOIS
+			commentaires = [c.contenu for c in tache.commentaires.all()]
+			data.append({
+				'titre': tache.titre,
+				'commentaires': commentaires,
+			})
+		return Response(data)
 

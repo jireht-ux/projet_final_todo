@@ -180,10 +180,29 @@ CELERY_BEAT_SCHEDULE = {
 }
 
 
-# Désactiver la configuration LOGGING (empêche Django d'appliquer dictConfig)
-LOGGING_CONFIG = None
+# Activer le logging SQL : afficher les requêtes SQL (django.db.backends) sur la console
+# Utiliser dictConfig pour appliquer la configuration
+LOGGING_CONFIG = 'logging.config.dictConfig'
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': True,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'simple': {
+            'format': '%(levelname)s %(asctime)s %(name)s %(message)s'
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+    },
+    'loggers': {
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    },
 }
 
