@@ -1,6 +1,52 @@
 Auteur: TAFOTIE Jireh
 Date: 07/02/2026
 Type de livraison : Partielle
+Formation Full-Stack: Ajout de Tâches Asynchrones avec Celery & Redis: Partie 3 : Intégration Front-End et Tâches Planifiées
+Checklist: 
+
+    -Préparation de la Branche Git
+
+    -Créer une Tâche Longue et ses Endpoints API
+
+    -Intégrer le Suivi dans le Front-End React
+
+    -Tester le Flux Complet
+
+    -Créer une Tâche Périodique 
+
+    -Configurer le Planificateur dans settings.py
+
+    -Lancer Celery Beat
+
+    -Tester la Tâche Planifiée 
+
+    -Récapitulatif et Finalisation   (
+
+    -Commit et Fusion
+
+    -CRT DEV
+
+    -Livraison
+
+    -Pull request
+
+Fichiers  Modifiés :
+
+
+    -Livraisons.txt
+    -config/settings.py
+    -frontend/src/App.jsx
+    -taches/tasks.py
+    -taches/urls.py
+    -taches/views.py
+
+Fichiers ajoutés : 
+    - cmd.txt
+
+--------------------------------------------------------------------
+Auteur: TAFOTIE Jireh
+Date: 07/02/2026
+Type de livraison : Partielle
 Formation Full-Stack: Ajout de Tâches Asynchrones avec Celery & Redis: Partie 2 : Cas d'Usage Pratiques et Surveillance
 Checklist: 
 

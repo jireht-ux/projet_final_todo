@@ -20,6 +20,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -169,4 +170,12 @@ CELERY_TASK_ALWAYS_EAGER = False
 
 # Optional: django-celery-beat scheduler
 # CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
+
+# Celery beat schedule: exécuter cleanup_completed_tasks toutes les 5 minutes
+CELERY_BEAT_SCHEDULE = {
+    'cleanup-every-5-minutes': {
+        'task': 'taches.tasks.cleanup_completed_tasks',
+        'schedule': timedelta(minutes=5),
+    },
+}
 

@@ -1,0 +1,15 @@
+---------------------------------------------------------------------
+                COMMANDE POUR FAIRE FONCTIONNER LE Projet---------
+---------------------------------------------------------------------
+
+-Lancer docker( à la racine du projet): docker start mon-projet-redis
+ 
+-lANCER LE SERVEUR PYTHON: python3 manage.py runserver
+
+-Lancer le frontend(/frontend/):  npm run dev
+
+- Lancer celery beat( à la réacine du projet): celery -A config.monprojet beat -l info
+
+-Lancer le worker ( à la racine du projet): celery -A config.monprojet worker --loglevel=info
+
+- Lancer flower le dashboard ( à la racine du projet): celery -A config.monprojet flower --add

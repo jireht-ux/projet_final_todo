@@ -40,3 +40,22 @@ def send_creation_email(tache_id):
     # Send the email normally in development (console backend)
     send_mail(subject, message, from_email, recipient_list, fail_silently=False)
     return f"E-mail envoyé pour la tâche {tache_id}."
+
+
+@shared_task
+def generate_task_report():
+    """Simule un long traitement et retourne un message de succès."""
+    time.sleep(15)
+    return "Le rapport de tâches a été généré avec succès !"
+
+
+@shared_task
+def cleanup_completed_tasks():
+    """Supprime toutes les `Tache` marquées comme `termine=True`.
+
+    Retourne le nombre de tâches supprimées.
+    """
+    qs = Tache.objects.filter(termine=True)
+    # queryset.delete() retourne un tuple (n_deleted, {<model>: n, ...})
+    deleted_count, _ = qs.delete()
+    return deleted_count

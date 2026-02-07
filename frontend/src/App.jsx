@@ -19,6 +19,8 @@ function App() {
     }
   })
   const [error, setError] = useState(null)
+  const [reportTaskId, setReportTaskId] = useState(null)
+  const [reportStatus, setReportStatus] = useState('')
 
   useEffect(() => {
     let isMounted = true
@@ -44,6 +46,34 @@ function App() {
       console.warn('localStorage unavailable', e)
     }
   }, [token])
+
+  // Polling effect to check report status when a task id is set
+  useEffect(() => {
+    if (!reportTaskId) return
+
+    const interval = setInterval(async () => {
+      try {
+        const res = await fetch(`http://127.0.0.1:8000/taches/check-report-status/${reportTaskId}/`, {
+          headers: token ? { Authorization: `Token ${token}` } : {}
+        })
+        if (!res.ok) {
+          const text = await res.text()
+          throw new Error(`HTTP ${res.status} ${text}`)
+        }
+        const data = await res.json()
+        setReportStatus(data)
+        if (data.state === 'SUCCESS' || data.state === 'FAILURE') {
+          clearInterval(interval)
+        }
+      } catch (err) {
+        console.error('Erreur check report status', err)
+        setReportStatus(err.message || 'Erreur check status')
+        clearInterval(interval)
+      }
+    }, 3000)
+
+    return () => clearInterval(interval)
+  }, [reportTaskId])
 
   async function handleAjoutTache(titre) {
     try {
@@ -128,6 +158,25 @@ function App() {
     setToken(null)
   }
 
+  async function handleStartReport() {
+    try {
+      const res = await fetch('http://127.0.0.1:8000/taches/start-report/', {
+        method: 'POST',
+        headers: token ? { Authorization: `Token ${token}` } : {}
+      })
+      if (!res.ok) {
+        const text = await res.text()
+        throw new Error(`HTTP ${res.status} ${text}`)
+      }
+      const data = await res.json()
+      setReportTaskId(data.task_id)
+      setReportStatus('Démarré')
+    } catch (err) {
+      console.error('Erreur démarrage rapport', err)
+      setReportStatus(err.message || 'Erreur démarrage rapport')
+    }
+  }
+
 
   if (isLoading) {
     return (
@@ -150,6 +199,19 @@ function App() {
       <button type="button" onClick={handleLogout} style={{ marginLeft: 8 }}>
         Déconnexion
       </button>
+      <button type="button" onClick={handleStartReport} style={{ marginLeft: 8 }}>
+        Générer un Rapport
+      </button>
+      {reportTaskId && (
+        <div style={{ marginTop: 8 }}>
+          <strong>Report Task ID:</strong> {reportTaskId}
+        </div>
+      )}
+      {reportStatus && (
+        <div style={{ marginTop: 8 }}>
+          <strong>Statut du rapport:</strong> {typeof reportStatus === 'string' ? reportStatus : JSON.stringify(reportStatus)}
+        </div>
+      )}
       <AjoutTacheForm onAjout={handleAjoutTache} />
       <TacheListe taches={taches} loading={loading} error={error} onSupprime={handleSupprimeTache} handleToggleTache={handleToggleTache} />
     </div>
