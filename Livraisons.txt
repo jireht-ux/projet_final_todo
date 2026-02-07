@@ -1,4 +1,59 @@
 Auteur: TAFOTIE Jireh
+Date: 07/02/2026
+Type de livraison : Partielle
+Formation Full-Stack: Ajout de Tâches Asynchrones avec Celery & Redis: Partie 2 : Cas d'Usage Pratiques et Surveillance
+Checklist: 
+
+    -Préparation de la Branche Git
+
+    -Configurer le "Backend" d'E-mail de Django pour le Développement
+
+    -Créer la Tâche d'Envoi d'E-mail
+
+    -Déclencher la Tâche à la Création d'un Objet
+
+    -Tester le Flux Complet
+
+    -Installer Flower
+
+    -Lancer Flower
+
+    -Explorer l'Interface de Flower 
+
+    -Observer en Temps Réel 
+
+    -Simuler un Échec
+
+    -Observer l'Échec
+
+    -Implémenter le Réessai Automatique 
+    
+    -Tester le Réessai
+
+    -Commit et Fusion
+
+    -CRT DEV
+
+    -Livraison
+
+    -Pull request
+
+Fichiers  Modifiés :
+
+
+    -Livraisons.txt
+    -config/__init__.py
+    -config/settings.py
+    -requirements.txt
+    -taches/tasks.py
+    -taches/views.py
+
+Fichiers ajoutés : 
+
+    - 
+    
+--------------------------------------------------------------------
+Auteur: TAFOTIE Jireh
 Date: 06/02/2026
 Type de livraison : Partielle
 Formation Full-Stack: Ajout de Tâches Asynchrones avec Celery & Redis(Partie 1 : Introduction et Configuration)
