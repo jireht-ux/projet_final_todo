@@ -5,13 +5,15 @@ from django.http import HttpResponse
 from .models import Tache
 from .forms import TacheForm
 from .serializers import TacheSerializer
-from .tasks import send_creation_email
+from .tasks import send_creation_email, generate_task_report
 
 # Django REST Framework
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
+from rest_framework.views import APIView
+from celery.result import AsyncResult
 
 
 def tache_list(request):
@@ -94,6 +96,20 @@ class TacheViewSet(ModelViewSet):
 		serializer.save(owner=self.request.user)
 		# Déclenche l'envoi d'e-mail en tâche asynchrone en passant l'ID créé
 		send_creation_email.delay(serializer.instance.id)
+
+
+class StartReportGenerationView(APIView):
+	"""Démarre la génération du rapport en arrière-plan et retourne l'ID de la tâche."""
+	def post(self, request):
+		task = generate_task_report.delay()
+		return Response({'task_id': task.id})
+
+
+class CheckTaskStatusView(APIView):
+	"""Vérifie l'état d'une tâche Celery via son task_id."""
+	def get(self, request, task_id):
+		async_result = AsyncResult(task_id)
+		return Response({'state': async_result.state, 'result': async_result.result})
 
 
 def TestCeleryView(request):
